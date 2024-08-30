@@ -1,1 +1,1 @@
-afip.py
+git+https://github.com/AfipSDK/afip.py.git@main
