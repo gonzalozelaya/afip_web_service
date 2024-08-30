@@ -20,7 +20,7 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': [' l10n_ar'],
+    'depends': ['res.partner'],
     'external_dependencies': {
         'python': ['afip.py'],
     },
