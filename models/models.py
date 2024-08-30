@@ -4,7 +4,7 @@ from datetime import datetime, timedelta
 from afip import Afip
 from odoo.exceptions import UserError
 
-class AfipPadron(models.Model):
+class AfipPadron(models.TransientModel):
   _name='afip.web.services'
   
   name=fields.Char('Nombre')
