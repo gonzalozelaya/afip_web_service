@@ -7,8 +7,9 @@ from odoo.exceptions import UserError
 class AfipPadron(models.Model):
   _inherit='res.partner'
   
-  afip_company_id=fields.Many2one('res.company',default=1)
-  
+  afip_company_id=fields.Many2one(
+        comodel_name='res.company',
+        string="Compania",)
   
   def connectToAfip(self):
       private_key, certificate = self.afip_company_id.sudo()._get_key_and_certificate()
