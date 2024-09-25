@@ -4,13 +4,19 @@ from datetime import datetime, timedelta
 from afip import Afip
 from odoo.exceptions import UserError
 
-class AfipPadron(models.TransientModel):
-  _name='afip.web.services'
+class AfipPadron(models.Model):
+  _inherit='res.partner'
   
-  name=fields.Char('Nombre')
+  afip_company_id=fields.Many2one('res.company',default=1)
+  
   
   def connectToAfip(self):
-      afip = Afip({ "CUIT": 20409378472 })
-      tax_id = 20111111111
-      taxpayer_details = afip.RegisterScopeThirteen.getTaxpayerDetails(tax_id)
+      private_key, certificate = self.afip_company_id.sudo()._get_key_and_certificate()
+      afip = Afip({
+          "CUIT": 20401498819,
+          "cert": certificate,
+          "key": private_key
+      })
+      customer_vat = self.vat
+      taxpayer_details = afip.RegisterInscriptionProof.getTaxpayerDetails(customer_vat)
       raise UserError(str(taxpayer_details))
